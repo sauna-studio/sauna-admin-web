@@ -66,6 +66,7 @@ export async function proxyAuthentication(
 ): Promise<Response> {
 	if (
 		url.origin !== authOrigin ||
+		request.headers.get('Host') !== new URL(authOrigin).host ||
 		url.search ||
 		methods.get(path) !== request.method ||
 		path.includes('/registration/')

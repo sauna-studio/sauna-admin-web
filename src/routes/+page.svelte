@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { Moon, Sun, Waves, LockKeyhole, CalendarDays, Tent, Clock } from '@lucide/svelte';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import * as Card from '#lib/components/ui/card/index.js';
@@ -58,3 +59,7 @@
 		</section>
 	</main>
 </div>
+
+<nav class="bg-background p-5 text-center text-foreground">
+	<a class="underline" href={resolve('/auth')}>Passkeyログインへ</a>
+</nav>

@@ -16,3 +16,11 @@ Bun 1.4.4で実行。GitHub ActionsではなくローカルmacOSの検証。
 独立Review Agentの最終再検証もcheck / lint / unit19 / production build / E2E6 / api:smoke / diffcheckすべて成功。非string version拒否をBun直接呼出でも再現確認し、顧客の入力巻戻り修正も再確認した。未解決blocking指摘なし。GitHub上のCodexレビューとCIはローカル限定作業のため未依頼・未実行。
 
 Foundation PR preparation: refreshed frozen install, type check (0 errors/warnings), lint, unit 19 and production build successfully. Added read-only, SHA-pinned Bun CI for these checks and the existing public-shell Playwright tests. PR creation is now authorized by the latest user instruction; remote CI results are pending until they actually run.
+
+## Passkey staff UI and BFF
+
+Added `/auth` (login/logout only; no anonymous staff enrollment), generated OpenAPI client and a fixed seven-path local BFF. Exact `http://localhost:5174` Origin and Fetch Metadata are required; only staff flow/session cookies and CSRF are forwarded to fixed `127.0.0.1:8080`. Redirects are rejected, body reads are bounded at 128 KiB, and one 10-second deadline covers request read, fetch and response read. Cookies retain Secure/HttpOnly/SameSite=Strict and all responses are no-store. Workspace membership and management permission remain unimplemented and the UI states this explicitly.
+
+Type check (0 errors/warnings), lint, production build, unit tests and existing six public-shell E2E cases passed. Unit regressions cover origin/route restrictions, cookie isolation/duplicates, bounded/cancelled streams, safe errors, native JSON credential APIs and generated client requests. Bun 1.4.4 misreports native Request.credentials='same-origin' as 'include'; tests assert the constructor input without changing browser policy.
+
+Dedicated `bun run test:auth` requires production build and the local API/PostgreSQL. It uses canonical localhost:5174 and verifies signed-out staff UI/enrollment denial, without claiming an authorized staff session. Trace/video/screenshots are off in both configs; no HAR/storage state/private keys are recorded. Safari/iOS, real authenticators and Workspace authorization remain unverified.

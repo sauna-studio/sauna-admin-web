@@ -39,12 +39,12 @@
 			スタッフ用画面は現在準備中です。このページには予約・顧客・シフトのデータは表示されず、管理操作もできません。
 		</p>
 		<div class="mt-8 flex items-center gap-3">
-			<Button disabled
-				><LockKeyhole aria-hidden="true" class="size-4" /> Passkeyでログイン（準備中）</Button
+			<Button href={resolve('/auth')}
+				><LockKeyhole aria-hidden="true" class="size-4" /> Passkeyでログイン</Button
 			>
 		</div>
 		<p class="mt-3 text-sm text-muted-foreground">
-			ログインと施設ごとの権限確認は、今後の実装で提供します。
+			Passkeyログインを利用できます。社員の所属確認と施設ごとの管理権限は準備中です。
 		</p>
 		<section class="mt-14 grid gap-4 md:grid-cols-3" aria-label="今後提供予定の機能">
 			{#each [{ title: '予約', icon: CalendarDays }, { title: '設備', icon: Tent }, { title: 'シフト', icon: Clock }] as item (item.title)}
@@ -59,7 +59,3 @@
 		</section>
 	</main>
 </div>
-
-<nav class="bg-background p-5 text-center text-foreground">
-	<a class="underline" href={resolve('/auth')}>Passkeyログインへ</a>
-</nav>

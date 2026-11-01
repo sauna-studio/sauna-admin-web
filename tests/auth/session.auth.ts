@@ -7,7 +7,7 @@ test('staff login UI cannot register or claim management permission', async ({ p
 	await expect(page.getByRole('button', { name: 'Passkeyを登録', exact: true })).toHaveCount(0);
 	await expect(
 		page.getByText(
-			'社員のGoogle Workspace所属確認と管理権限は未実装です。ログインしても管理操作は利用できません。'
+			'社員のGoogle Workspace所属確認と施設権限は未実装です。ログインしても予約・設備・社員の管理は利用できません。'
 		)
 	).toBeVisible();
 	const status = await page.evaluate(async () => {
